@@ -1,0 +1,6 @@
+type Mutation {
+  createAccount(creation: AccountCreation!): Account!
+
+  createIotDevice(ownerId: UUID!): IotDevice!
+  startLive(creation: LiveCreation): Live!
+}

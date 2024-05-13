@@ -1,0 +1,21 @@
+type Account {
+  id: UUID!
+  role: AccountRole!
+  username: String!
+#  password: String!
+  nickname: String!
+  avatarUrl: String!
+  devices: [IotDevice!]!
+}
+
+enum AccountRole {
+  MEMBER
+  ADMIN
+}
+
+input AccountCreation {
+  role: AccountRole!
+  username: String!
+  password: String!
+  nickname: String!
+}

@@ -1,0 +1,25 @@
+type IotDevice {
+  id: UUID!
+  owner: Account!
+  name: String!
+  live: Live
+  accessKey: String
+}
+
+input IotDeviceCreation {
+  ownerId: UUID!
+  name: String!
+}
+
+type Live {
+  id: UUID!
+  device: IotDevice!
+  video: Video!
+  title: String!
+  viewerCnt: Int!
+}
+
+input LiveCreation {
+  deviceId: UUID!
+  liveTitle: String!
+}
