@@ -7,7 +7,6 @@ type IotDevice {
 }
 
 input IotDeviceCreation {
-  ownerId: UUID!
   name: String!
 }
 
@@ -17,9 +16,4 @@ type Live {
   video: Video!
   title: String!
   viewerCnt: Int!
-}
-
-input LiveCreation {
-  deviceId: UUID!
-  liveTitle: String!
 }

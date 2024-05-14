@@ -9,6 +9,7 @@ import {SignupPage} from "@/pages/SignupPage.tsx";
 import {LoginPage} from "@/pages/LoginPage.tsx";
 import {IndexPage} from "@/pages/IndexPage.tsx";
 import {TestPage} from "@/dev/pages/TestPage.tsx";
+import {ThemeProvider} from "@/styles/ThemeProvider.tsx";
 
 const routes: RouteObject[] = [
   { path: '/', element: <IndexPage /> },
@@ -32,7 +33,9 @@ const client = new ApolloClient({
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <ApolloProvider client={client}>
-    <RouterProvider router={router} />
-  </ApolloProvider>
+  <ThemeProvider defaultTheme="dark">
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
+  </ThemeProvider>
 );

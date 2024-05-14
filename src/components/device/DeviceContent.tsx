@@ -5,7 +5,7 @@ import {useEffect} from "react";
 import {consts} from "@/configures/consts.ts";
 import {iconStyle} from "@/styles/globalStyles.ts";
 import {HStack, VStack} from "@/lib/style/layouts.tsx";
-import {TEXT1, TEXT2, TEXT3} from "@/styles/colors.ts";
+import {TEXT1, TEXT3} from "@/styles/colors.ts";
 
 export function DeviceContent() {
   const {myInfo} = useMyInfo();
@@ -27,10 +27,15 @@ export function DeviceContent() {
 }
 
 function DeviceItem({device}: { device: IotDevice }) {
+  const thumbnailUrl = device.live?.video.thumbnailUrl;
   return (
     <div>
       <a href="https://example.com">
-        <img src={device.live?.video.thumbnailUrl ?? ""} alt="live_thumbnail"/>
+        {thumbnailUrl ? (
+          <img src={thumbnailUrl} alt="live_thumbnail"/>
+        ) : (
+          <div css={{width: 320, height: 180, background: "#eeeeee"}} />
+        )}
       </a>
       <HStack gap={10} className="m-2">
         <img

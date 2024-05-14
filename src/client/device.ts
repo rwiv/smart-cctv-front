@@ -46,15 +46,15 @@ export function useIotDevices(ownerId: string) {
 
 
 const CREATE_IOT_DEVICE = gql`
-  mutation CreateChatUser($ownerId: UUID!) {
-    createIotDevice(ownerId: $ownerId) {
+  mutation CreateChatUser($creation: IotDeviceCreation) {
+    createIotDevice(creation: $creation) {
       ...IotDeviceFields
     }
   }
   ${IOT_DEVICE_FIELDS}
 `;
 
-export function useCreateChatUser() {
+export function useCreateIotDevice() {
   const [createIotDevice, {loading, error}] = useMutation<Mutation>(CREATE_IOT_DEVICE);
   return {createIotDevice, loading, error};
 }

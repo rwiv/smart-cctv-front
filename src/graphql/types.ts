@@ -291,7 +291,6 @@ export type IotDevice = {
 
 export type IotDeviceCreation = {
   name: Scalars['String']['input'];
-  ownerId: Scalars['UUID']['input'];
 };
 
 export type Live = {
@@ -303,16 +302,10 @@ export type Live = {
   viewerCnt: Scalars['Int']['output'];
 };
 
-export type LiveCreation = {
-  deviceId: Scalars['UUID']['input'];
-  liveTitle: Scalars['String']['input'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   createAccount: Account;
   createIotDevice: IotDevice;
-  startLive: Live;
 };
 
 
@@ -322,12 +315,7 @@ export type MutationCreateAccountArgs = {
 
 
 export type MutationCreateIotDeviceArgs = {
-  ownerId: Scalars['UUID']['input'];
-};
-
-
-export type MutationStartLiveArgs = {
-  creation?: InputMaybe<LiveCreation>;
+  creation?: InputMaybe<IotDeviceCreation>;
 };
 
 export type Query = {
