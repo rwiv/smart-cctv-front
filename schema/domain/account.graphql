@@ -5,7 +5,7 @@ type Account {
 #  password: String!
   nickname: String!
   avatarUrl: String!
-  devices: [IotDevice!]!
+  devices: [Device!]!
 }
 
 enum AccountRole {

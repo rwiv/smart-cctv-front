@@ -10,29 +10,29 @@ import {Button} from "@/components/ui/button.tsx";
 import {Label} from "@/components/ui/label.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {useRef, useState} from "react";
-import {GET_IOT_DEVICES, useCreateIotDevice} from "@/client/device.ts";
-import {IotDeviceCreation} from "@/graphql/types.ts";
+import {GET_DEVICES, useCreateDevice} from "@/client/device.ts";
 import {css} from "@emotion/react";
 import {BG_BASE, HOVER, TEXT2} from "@/styles/colors.ts";
 import {useApolloClient} from "@apollo/client";
 import {useMyInfo} from "@/hooks/common/useMyInfo.ts";
+import {DeviceCreation} from "@/graphql/types.ts";
 
 export function DeviceCreateButton() {
 
   const apollo = useApolloClient();
 
   const {myInfo} = useMyInfo();
-  const {createIotDevice} = useCreateIotDevice();
+  const {createDevice} = useCreateDevice();
 
   const ref = useRef<HTMLButtonElement>(null);
   const [nameInput, setNameInput] = useState("");
 
   const onAddChatRoom = async () => {
-    const variables: {creation: IotDeviceCreation} = {
+    const variables: {creation: DeviceCreation} = {
       creation: { name: nameInput },
     };
-    const res = await createIotDevice({variables});
-    const created = res.data?.createIotDevice;
+    const res = await createDevice({variables});
+    const created = res.data?.createDevice;
     console.log(created)
     if (created === undefined) {
       throw Error("created chat room is undefined");
@@ -40,7 +40,7 @@ export function DeviceCreateButton() {
     setNameInput("");
     const myId = myInfo?.id;
     if (myId !== undefined) {
-      apollo.refetchQueries({ include: [GET_IOT_DEVICES(myId)] });
+      apollo.refetchQueries({ include: [GET_DEVICES(myId)] });
     }
     ref?.current?.click();
   }

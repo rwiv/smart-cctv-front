@@ -5,8 +5,8 @@ import {LIVE_FIELDS} from "@/client/live.ts";
 import {VIDEO_FIELDS} from "@/client/video.ts";
 import {ACCOUNT_FIELDS} from "@/client/account.ts";
 
-export const IOT_DEVICE_FIELDS = gql`
-  fragment IotDeviceFields on IotDevice {
+export const DEVICE_FIELDS = gql`
+  fragment DeviceFields on Device {
     id
     owner {
       id
@@ -15,14 +15,14 @@ export const IOT_DEVICE_FIELDS = gql`
     live {
       id
     }
-    accessKey
+    streamKey
   }
 `;
 
-export const GET_IOT_DEVICES = (ownerId: string) => gql`
-  query GetIotDevices {
-    iotDevices(ownerId: "${ownerId}") {
-      ...IotDeviceFields
+export const GET_DEVICES = (ownerId: string) => gql`
+  query GetDevices {
+    devices(ownerId: "${ownerId}") {
+      ...DeviceFields
       owner {
         ...AccountFields
       }
@@ -35,26 +35,26 @@ export const GET_IOT_DEVICES = (ownerId: string) => gql`
     }
   }
   ${ACCOUNT_FIELDS}
-  ${IOT_DEVICE_FIELDS}
+  ${DEVICE_FIELDS}
   ${LIVE_FIELDS}
   ${VIDEO_FIELDS}
 `;
 
-export function useIotDevices(ownerId: string) {
-  return useQuery(GET_IOT_DEVICES(ownerId));
+export function useDevices(ownerId: string) {
+  return useQuery(GET_DEVICES(ownerId));
 }
 
 
-const CREATE_IOT_DEVICE = gql`
-  mutation CreateChatUser($creation: IotDeviceCreation) {
-    createIotDevice(creation: $creation) {
-      ...IotDeviceFields
+const CREATE_DEVICE = gql`
+  mutation CreateChatUser($creation: DeviceCreation) {
+    createDevice(creation: $creation) {
+      ...DeviceFields
     }
   }
-  ${IOT_DEVICE_FIELDS}
+  ${DEVICE_FIELDS}
 `;
 
-export function useCreateIotDevice() {
-  const [createIotDevice, {loading, error}] = useMutation<Mutation>(CREATE_IOT_DEVICE);
-  return {createIotDevice, loading, error};
+export function useCreateDevice() {
+  const [createDevice, {loading, error}] = useMutation<Mutation>(CREATE_DEVICE);
+  return {createDevice, loading, error};
 }

@@ -1,24 +1,24 @@
 import {useMyInfo} from "@/hooks/common/useMyInfo.ts";
-import {useIotDevices} from "@/client/device.ts";
-import {IotDevice} from "@/graphql/types.ts";
+import {useDevices} from "@/client/device.ts";
 import {useEffect} from "react";
 import {consts} from "@/configures/consts.ts";
 import {iconStyle} from "@/styles/globalStyles.ts";
 import {HStack, VStack} from "@/lib/style/layouts.tsx";
 import {TEXT1, TEXT3} from "@/styles/colors.ts";
+import {Device} from "@/graphql/types.ts";
 
 export function DeviceContent() {
   const {myInfo} = useMyInfo();
-  const devicesData = useIotDevices(myInfo?.id ?? "");
+  const devicesData = useDevices(myInfo?.id ?? "");
 
   useEffect(() => {
-    console.log(devicesData.data?.iotDevices)
+    console.log(devicesData.data?.devices)
   }, [devicesData]);
 
   return (
     <div>
       <HStack>
-        {devicesData.data?.iotDevices?.map(device => (
+        {devicesData.data?.devices?.map(device => (
           <DeviceItem key={device.id} device={device} />
         ))}
       </HStack>
@@ -26,8 +26,8 @@ export function DeviceContent() {
   )
 }
 
-function DeviceItem({device}: { device: IotDevice }) {
-  const thumbnailUrl = device.live?.video.thumbnailUrl;
+function DeviceItem({device}: { device: Device }) {
+  const thumbnailUrl = device.live?.video?.thumbnailUrl;
   return (
     <div>
       <a href="https://example.com">

@@ -3,7 +3,7 @@ type Query {
   account(username: String = null): Account
   accounts(id: Long): Account
 
-  iotDevices(ownerId: UUID): [IotDevice!]!
+  devices(ownerId: UUID): [Device!]!
 
   videos(deviceId: UUID): [Video!]!
 }

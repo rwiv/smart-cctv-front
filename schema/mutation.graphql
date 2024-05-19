@@ -1,5 +1,5 @@
 type Mutation {
   createAccount(creation: AccountCreation!): Account!
 
-  createIotDevice(creation: IotDeviceCreation): IotDevice!
+  createDevice(creation: DeviceCreation): Device!
 }

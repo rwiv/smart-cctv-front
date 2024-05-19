@@ -1,0 +1,7 @@
+type Live {
+  id: UUID!
+  device: Device!
+  video: Video
+  title: String!
+  viewerCnt: Int!
+}

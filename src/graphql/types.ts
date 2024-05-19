@@ -21,7 +21,7 @@ export type Scalars = {
 export type Account = {
   __typename?: 'Account';
   avatarUrl: Scalars['String']['output'];
-  devices: Array<IotDevice>;
+  devices: Array<Device>;
   id: Scalars['UUID']['output'];
   /**   password: String! */
   nickname: Scalars['String']['output'];
@@ -40,6 +40,19 @@ export enum AccountRole {
   Admin = 'ADMIN',
   Member = 'MEMBER'
 }
+
+export type Device = {
+  __typename?: 'Device';
+  id: Scalars['UUID']['output'];
+  live?: Maybe<Live>;
+  name: Scalars['String']['output'];
+  owner: Account;
+  streamKey: Scalars['String']['output'];
+};
+
+export type DeviceCreation = {
+  name: Scalars['String']['input'];
+};
 
 export enum ErrorDetail {
   /**
@@ -280,32 +293,19 @@ export enum ErrorType {
   Unknown = 'UNKNOWN'
 }
 
-export type IotDevice = {
-  __typename?: 'IotDevice';
-  accessKey?: Maybe<Scalars['String']['output']>;
-  id: Scalars['UUID']['output'];
-  live?: Maybe<Live>;
-  name: Scalars['String']['output'];
-  owner: Account;
-};
-
-export type IotDeviceCreation = {
-  name: Scalars['String']['input'];
-};
-
 export type Live = {
   __typename?: 'Live';
-  device: IotDevice;
+  device: Device;
   id: Scalars['UUID']['output'];
   title: Scalars['String']['output'];
-  video: Video;
+  video?: Maybe<Video>;
   viewerCnt: Scalars['Int']['output'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createAccount: Account;
-  createIotDevice: IotDevice;
+  createDevice: Device;
 };
 
 
@@ -314,8 +314,8 @@ export type MutationCreateAccountArgs = {
 };
 
 
-export type MutationCreateIotDeviceArgs = {
-  creation?: InputMaybe<IotDeviceCreation>;
+export type MutationCreateDeviceArgs = {
+  creation?: InputMaybe<DeviceCreation>;
 };
 
 export type Query = {
@@ -324,7 +324,7 @@ export type Query = {
   account?: Maybe<Account>;
   accounts?: Maybe<Account>;
   accountsAll: Array<Account>;
-  iotDevices: Array<IotDevice>;
+  devices: Array<Device>;
   videos: Array<Video>;
 };
 
@@ -339,7 +339,7 @@ export type QueryAccountsArgs = {
 };
 
 
-export type QueryIotDevicesArgs = {
+export type QueryDevicesArgs = {
   ownerId?: InputMaybe<Scalars['UUID']['input']>;
 };
 
@@ -351,7 +351,7 @@ export type QueryVideosArgs = {
 export type Video = {
   __typename?: 'Video';
   createdAt: Scalars['DateTime']['output'];
-  device: IotDevice;
+  device: Device;
   id: Scalars['UUID']['output'];
   thumbnailUrl?: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
