@@ -7,7 +7,9 @@ import {consts} from "@/configures/consts.ts";
 
 export function useMyInfo() {
 
-  const {data: myInfoData, error} = useQuery<Query>(MY_INFO);
+  const {data: myInfoData, error} = useQuery<Query>(MY_INFO, {
+    fetchPolicy: "no-cache",
+  });
   const myInfo = myInfoData?.account ?? undefined;
 
   const navigate = useNavigate();

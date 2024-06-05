@@ -1,8 +1,8 @@
 import {BG_BASE} from "@/styles/colors.ts";
 import {LeftSidebar} from "@/components/layouts/LeftSidebar.tsx";
-import {LiveVideo} from "@/components/video/LiveVideo.tsx";
+import {VideoListContent} from "@/components/video/VideoListContent.tsx";
 
-export function LivePage() {
+export function VideoListPage() {
 
   return (
     <div css={{ display: "flex", height: "100vh", background: BG_BASE }}>
@@ -10,7 +10,7 @@ export function LivePage() {
         <LeftSidebar css={{margin: "0rem 1rem"}} />
       </div>
       <div className="flex w-full m-3 overflow-auto">
-        <LiveVideo />
+        <VideoListContent />
       </div>
     </div>
   )

@@ -19,36 +19,13 @@ export function AccountSelectPage() {
     navigate("/");
   }
 
-  const onLoginUser1 = async () => {
-    const req: LoginRequest = {
-      username: "user1@gmail.com",
-      password: "1234",
-    };
-    await login(req, false);
-    await client.refetchQueries({ include: [MY_INFO] });
-    navigate("/");
-  }
-
-  const onLoginUser2 = async () => {
-    const req: LoginRequest = {
-      username: "user2@gmail.com",
-      password: "1234",
-    };
-    await login(req, false);
-    await client.refetchQueries({ include: [MY_INFO] });
-    navigate("/");
-  }
-
   return (
     <>
       <div>
-        <Button onClick={onLoginAdmin}>admin</Button>
-        <Button onClick={onLoginUser1}>user1</Button>
-        <Button onClick={onLoginUser2}>user2</Button>
+        <Button onClick={onLoginAdmin}>admin login</Button>
       </div>
       <div>
-        <Link to={"/signup"}><Button>회원가입</Button></Link>
-        <Link to={"/login"}><Button>로그인</Button></Link>
+        <Link to={"/login"}><Button>로그인 페이지</Button></Link>
       </div>
     </>
   )

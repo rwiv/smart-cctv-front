@@ -10,13 +10,15 @@ import {LoginPage} from "@/pages/LoginPage.tsx";
 import {IndexPage} from "@/pages/IndexPage.tsx";
 import {TestPage} from "@/dev/pages/TestPage.tsx";
 import {ThemeProvider} from "@/styles/ThemeProvider.tsx";
-import {LivePage} from "@/pages/LivePage.tsx";
+import {VideoListPage} from "@/pages/VideoListPage.tsx";
+import {VideoPage} from "@/pages/VideoPage.tsx";
 
 const routes: RouteObject[] = [
   { path: '/', element: <IndexPage /> },
+  { path: '/video', element: <VideoListPage/> },
+  { path: '/video/:name', element: <VideoPage/> },
   { path: '/login', element: <LoginPage /> },
   { path: '/signup', element: <SignupPage /> },
-  { path: '/live', element: <LivePage /> },
 ];
 
 if (consts.isDev) {

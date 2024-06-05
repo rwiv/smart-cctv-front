@@ -6,9 +6,11 @@ import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Center, VStack} from "@/lib/style/layouts.tsx";
 import {useState} from "react";
-import {login, LoginRequest} from "@/client/account.ts";
+import {login, LoginRequest, MY_INFO} from "@/client/account.ts";
+import {useApolloClient} from "@apollo/client";
 
 export function LoginPage() {
+
   const form = useForm<LoginRequest>({
     defaultValues: {
       username: "",
@@ -17,9 +19,11 @@ export function LoginPage() {
   });
   const [remember, setRemember] = useState(false);
   const navigate = useNavigate();
+  const client = useApolloClient();
 
   const onSubmit: SubmitHandler<LoginRequest> = async req => {
     await login(req, remember);
+    await client.refetchQueries({ include: [MY_INFO] });
     navigate("/");
   }
 
